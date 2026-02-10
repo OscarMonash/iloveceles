@@ -28,7 +28,6 @@ export default function ValentineText() {
     "Zebros" 
   ];
 
-  // Animation constants...
   const PAUSE_DURATION = 2;
   const SLIDE_IN_DURATION = 1;
   const BOUNCE_DURATION = 0.5;
@@ -36,7 +35,6 @@ export default function ValentineText() {
   const TOTAL_CYCLE = SLIDE_IN_DURATION + BOUNCE_DURATION + PAUSE_DURATION + SLIDE_OUT_DURATION;
 
   useEffect(() => {
-    // ... (GSAP Animation Logic stays exactly the same) ...
     if (!containerRef.current) return;
     
     gsap.set(titleRef.current, { opacity: 0, y: 50, scale: 0.9 });
