@@ -20,7 +20,6 @@ const heartPopStyles = `
 `;
 
 export default function Proposal() {
-  // 'question' | 'confirm' | 'trapped' | 'success'
   const [stage, setStage] = useState('question');
   const [isHoverTrapped, setIsHoverTrapped] = useState(false);
   const [popHearts, setPopHearts] = useState([]);
