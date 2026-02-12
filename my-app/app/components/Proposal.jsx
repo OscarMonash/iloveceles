@@ -19,7 +19,7 @@ const heartPopStyles = `
   }
 `;
 
-// 1. ACCEPT THE PROP HERE
+
 export default function Proposal({ onSuccess }) {
   const [stage, setStage] = useState('question');
   const [isHoverTrapped, setIsHoverTrapped] = useState(false);
@@ -80,7 +80,7 @@ export default function Proposal({ onSuccess }) {
           style={{
             left: '50vw',
             top: '50vh',
-            width: '150px',
+            width: '300px',
             height: '150px',
             pointerEvents: 'none',
             animation: 'heartPop 2.5s ease-out forwards',
@@ -91,7 +91,14 @@ export default function Proposal({ onSuccess }) {
             borderRadius: '50%',
           }}
         >
-          <div style={{ fontSize: '150px', lineHeight: '1' }}>❤️</div>
+          <div style = {{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ fontSize: '20px', lineHeight: '1' }}>BANGGGGGGG</div>
+            <img 
+              src="/images/bang.gif" 
+              alt="Pop" 
+              className="w-full h-full object-contain drop-shadow-xl"
+            />
+          </div>
         </div>
       ))}
 
@@ -146,7 +153,7 @@ export default function Proposal({ onSuccess }) {
              <h2 className="text-3xl font-bold text-red-500 font-handwriting">
                 are you sure? 💔
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-lg font-handwriting">
                 really really sure? 
             </p>
             
