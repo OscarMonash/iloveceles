@@ -141,11 +141,6 @@ export default function ValentineText() {
           </div>
         ))}
       </div>
-      
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 text-white animate-bounce text-sm font-bold opacity-70">
-        SCROLL DOWN ↓
-      </div>
     </div>
   );
 }

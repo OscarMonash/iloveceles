@@ -27,15 +27,9 @@ export default function HomePage() {
     >
       
       <ScrollHearts />
-      
-      {/* --- FIX IS HERE --- */}
-      {/* Removed "h-screen" and "flex". 
-          We let the ValentineText component (which is 100vh internally) 
-          and GSAP handle the sizing. */}
       <section className="w-full relative z-10">
         <ValentineText />
       </section>
-      {/* ------------------- */}
 
       <section className="w-full relative z-10 py-20 backdrop-blur-sm">
         <PhotoGallery />

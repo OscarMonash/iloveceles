@@ -24,7 +24,7 @@ export default function LoveLetter() {
           </p>
           
           <p>
-            Thank you so much for being with me and putting up with me even when sometimes I myself know I'm being a pain
+            Thank you so much for being with me and putting up with me when even sometimes I know I'm being a pain to deal with
           </p>
 
           <p>
@@ -32,7 +32,7 @@ export default function LoveLetter() {
           </p>
 
           <p>
-            I love you so much beb and I hope this year treats us well and that we get to do everything we wanted to do with each other (and go on that trip)
+            I love you so so much beb and I hope this year treats us well and that we get to do everything we wanted to do with each other (and go on that trip)
           </p>
 
           <p>
