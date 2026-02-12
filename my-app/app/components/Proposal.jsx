@@ -92,7 +92,6 @@ export default function Proposal({ onSuccess }) {
           }}
         >
           <div style = {{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ fontSize: '20px', lineHeight: '1' }}>BANGGGGGGG</div>
             <img 
               src="/images/bang.gif" 
               alt="Pop" 
@@ -115,7 +114,7 @@ export default function Proposal({ onSuccess }) {
         {stage === 'success' ? (
           <div className="animate-pulse space-y-6">
             <h1 className="text-5xl font-bold text-pink-600 font-handwriting">
-              YAYYY! 
+              BANGGGGG 🤜
             </h1>
             <p className="text-2xl text-gray-700 font-handwriting">
               best valentines day eva, lav u
