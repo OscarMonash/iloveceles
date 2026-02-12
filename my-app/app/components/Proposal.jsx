@@ -171,8 +171,7 @@ export default function Proposal({ onSuccess }) {
             <h2 className="text-5xl font-bold text-pink-600 leading-tight font-handwriting drop-shadow-sm">
               will you be my valentines beb?
             </h2>
-            
-            <div className="text-9xl my-6 animate-bounce">🥺</div>
+            <img src="/images/sayyes.gif" alt="Puppy Eyes" className="w-40 mx-auto animate-bounce" />
 
             <div className="flex justify-center gap-8 mt-8 relative">
               <button 

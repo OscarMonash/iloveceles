@@ -6,6 +6,8 @@ import ValentineText from './components/ValentinesText';
 import PhotoGallery from './components/PhotoGallery';
 import Proposal from './components/Proposal'; 
 import LoveLetter from './components/LoveLetter';
+// 1. Import the new component
+import WelcomeEffects from './components/WelcomeEffects';
 
 export default function HomePage() {
   const [isAccepted, setIsAccepted] = useState(false);
@@ -25,8 +27,10 @@ export default function HomePage() {
     <main 
       className="relative w-full min-h-[200vh] bg-[linear-gradient(135deg,#d35c8c_0%,#ffc9fc_100%)] bg-fixed overflow-x-hidden"
     >
-      
+      <WelcomeEffects />
+
       <ScrollHearts />
+      
       <section className="w-full relative z-10">
         <ValentineText />
       </section>
