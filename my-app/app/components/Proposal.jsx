@@ -19,10 +19,12 @@ const heartPopStyles = `
   }
 `;
 
-export default function Proposal() {
+// 1. ACCEPT THE PROP HERE
+export default function Proposal({ onSuccess }) {
   const [stage, setStage] = useState('question');
   const [isHoverTrapped, setIsHoverTrapped] = useState(false);
   const [popHearts, setPopHearts] = useState([]);
+  
   const handleHoverEnter = () => {
     setIsHoverTrapped(true);
   };
@@ -39,7 +41,7 @@ export default function Proposal() {
   };
 
   const handleConfirmYes = () => {
-    setStage('question'); 
+    setStage('trapped');
   };
   
   const handleConfirmNo = () => {
@@ -47,20 +49,21 @@ export default function Proposal() {
   };
 
   const handleFinalYes = () => {
-    // Create a pop heart animation
     const newHeart = {
       id: Date.now(),
     };
-    console.log('Adding heart with id:', newHeart.id);
     setPopHearts([...popHearts, newHeart]);
     
-    // Remove the heart animation after 2.5 seconds
     setTimeout(() => {
-      console.log('Removing heart with id:', newHeart.id);
       setPopHearts(prev => prev.filter(h => h.id !== newHeart.id));
     }, 2500);
     
     setStage('success');
+
+    // 2. TRIGGER THE LOVE LETTER UNLOCK
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   const showGiantYes = stage === 'trapped' || isHoverTrapped;
@@ -68,47 +71,40 @@ export default function Proposal() {
   return (
     <div className="flex items-center justify-center py-20 px-4 w-full">
       <style>{heartPopStyles}</style>
-      {/* Pop Hearts */}
-      {popHearts.length > 0 && console.log('Rendering', popHearts.length, 'hearts')}
-      {popHearts.map((heart, index) => {
-        console.log('Rendering heart', index, 'with id:', heart.id);
-        return (
-          <div
-            key={heart.id}
-            className="fixed z-[9999]"
-            style={{
-              left: '50vw',
-              top: '50vh',
-              width: '150px',
-              height: '150px',
-              pointerEvents: 'none',
-              animation: 'heartPop 2.5s ease-out forwards',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'transparent',
-              border: '2px solid red',
-              borderRadius: '50%',
-            }}
-          >
-            <div style={{ 
-              fontSize: '150px',
-              lineHeight: '1',
-              margin: '0',
-              padding: '0',
-            }}>
-              ❤️
-            </div>
-          </div>
-        );
-      })}
+      
+      {/* Pop Hearts Animation */}
+      {popHearts.map((heart) => (
+        <div
+          key={heart.id}
+          className="fixed z-[9999]"
+          style={{
+            left: '50vw',
+            top: '50vh',
+            width: '150px',
+            height: '150px',
+            pointerEvents: 'none',
+            animation: 'heartPop 2.5s ease-out forwards',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'transparent',
+            borderRadius: '50%',
+          }}
+        >
+          <div style={{ fontSize: '150px', lineHeight: '1' }}>❤️</div>
+        </div>
+      ))}
+
       <div className="relative bg-white/90 backdrop-blur-md p-10 rounded-3xl shadow-2xl max-w-lg w-full text-center border-4 border-pink-200 transition-all duration-500 hover:scale-[1.02]">
-        <div className="absolute -top-8 -left-8 text-7xl animate-bounce delay-100">🌹</div>
-        <div className="absolute -top-8 -right-8 text-7xl animate-bounce delay-300">🌸</div>
-        <div className="absolute -bottom-8 -left-8 text-7xl animate-bounce delay-500">🌷</div>
-        <div className="absolute -bottom-8 -right-8 text-7xl animate-bounce delay-700">🌻</div>
-        <div className="absolute top-1/2 -left-12 text-4xl animate-pulse text-pink-400">💖</div>
-        <div className="absolute top-1/2 -right-12 text-4xl animate-pulse text-pink-400 delay-75">💖</div>
+        
+        {/* 3. FIXED FLOWER POSITIONING (Prevents side-scroll on mobile) 
+            -left-2 on mobile, -left-8 on desktop (md:)
+        */}
+        <div className="absolute -top-6 -left-2 md:-left-8 md:-top-8 text-5xl md:text-7xl animate-bounce delay-100">🌹</div>
+        <div className="absolute -top-6 -right-2 md:-right-8 md:-top-8 text-5xl md:text-7xl animate-bounce delay-300">🌸</div>
+        <div className="absolute -bottom-6 -left-2 md:-left-8 md:-bottom-8 text-5xl md:text-7xl animate-bounce delay-500">🌷</div>
+        <div className="absolute -bottom-6 -right-2 md:-right-8 md:-bottom-8 text-5xl md:text-7xl animate-bounce delay-700">🌻</div>
+
         {stage === 'success' ? (
           <div className="animate-pulse space-y-6">
             <h1 className="text-5xl font-bold text-pink-600 font-handwriting">
@@ -117,7 +113,19 @@ export default function Proposal() {
             <p className="text-2xl text-gray-700 font-handwriting">
               best valentines day eva, lav u
             </p>
-            <div className="text-9xl mt-6 animate-bounce">💏</div>
+            
+            {/* VIDEO SECTION */}
+            <div className="w-full overflow-hidden rounded-xl shadow-lg border-2 border-pink-100">
+              <video 
+                src="/images/celes1.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+
             <div className="flex justify-center gap-4 text-4xl">
               <span>💖</span><span>💝</span><span>💖</span>
             </div>
@@ -129,11 +137,8 @@ export default function Proposal() {
             onMouseLeave={handleHoverLeave}
             className="w-full h-80 bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl flex flex-col items-center justify-center gap-4 hover:scale-105 transition-transform animate-pulse shadow-xl border-4 border-white"
           >
-            <span className="text-7xl font-bold drop-shadow-md">YES!!!</span>
-            <span className="text-2xl font-light italic">(There is no escape hehe)</span>
-            <div className="flex gap-4 text-5xl">
-              <span>🥺</span><span>👉</span><span>👈</span>
-            </div>
+            <span className="text-4xl font-bold drop-shadow-md">YES I WANT TO BE UR VALENTINES OSCAR THE BEST</span>
+            <span className="text-2xl font-light italic">(too bad 🤷)</span>
           </button>
 
         ) : stage === 'confirm' ? (
@@ -150,13 +155,13 @@ export default function Proposal() {
                 onClick={handleConfirmNo}
                 className="px-6 py-3 bg-gray-400 text-white text-xl font-bold rounded-full hover:bg-gray-500 transition-colors"
               >
-                No, go back! 😅
+                no beb i lav u i would never say no
               </button>
               <button 
                 onClick={handleConfirmYes}
                 className="px-6 py-3 bg-red-500 text-white text-xl font-bold rounded-full hover:bg-red-600 transition-colors"
               >
-                Yes, I'm sure 😔
+                yes whateva
               </button>
             </div>
           </div>

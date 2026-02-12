@@ -7,32 +7,27 @@ export default function ScrollHearts() {
   const lastSpawnTime = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 1. THROTTLE: Limit hearts to 1 every 50ms so it doesn't crash the browser
-      const now = Date.now();
-      if (now - lastSpawnTime.current < 50) return;
-      lastSpawnTime.current = now;
-
-      spawnHeart();
-    };
-
+    // Defined inside useEffect so it can access containerRef easily
     const spawnHeart = () => {
       if (!containerRef.current) return;
 
       const heart = document.createElement('div');
       
-      // 2. RANDOMIZE APPEARANCE
+      // 1. RANDOMIZE APPEARANCE
       const size = Math.floor(Math.random() * 30) + 20; // 20px - 50px
-      const startLeft = Math.random() * 100; // 0% - 100% horizontal
+      
+      // 2. FIX: Limit to 90% to prevent horizontal overflow 
+      // (If a heart spawns at 100% + 50px width, it creates a scrollbar. 90% is safe.)
+      const startLeft = Math.random() * 90; 
       
       // 3. SET STYLES
       heart.style.position = 'fixed';
       heart.style.bottom = '-50px';
-      heart.style.left = `${startLeft}%`;
+      heart.style.left = `${startLeft}%`; 
       heart.style.width = `${size}px`;
       heart.style.height = `${size}px`;
-      heart.style.zIndex = '50'; // High z-index to ensure visibility
-      heart.style.pointerEvents = 'none'; // Don't block clicks
+      heart.style.zIndex = '50'; 
+      heart.style.pointerEvents = 'none'; 
       
       // 4. SVG CONTENT
       heart.innerHTML = `
@@ -58,9 +53,18 @@ export default function ScrollHearts() {
       };
     };
 
+    const handleScroll = () => {
+      // THROTTLE: Limit hearts to 1 every 50ms
+      const now = Date.now();
+      if (now - lastSpawnTime.current < 50) return;
+      lastSpawnTime.current = now;
+
+      spawnHeart();
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return <div ref={containerRef} className="fixed inset-0 pointer-events-none z-50" />;
-}   
+}

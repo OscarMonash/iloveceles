@@ -1,27 +1,58 @@
+"use client";
+
+import { useState, useRef } from 'react';
 import ScrollHearts from './components/FloatingHearts';
 import ValentineText from './components/ValentinesText';
 import PhotoGallery from './components/PhotoGallery';
-import Proposal from './components/Proposal'; // <--- 1. Import it
+import Proposal from './components/Proposal'; 
+import LoveLetter from './components/LoveLetter';
 
 export default function HomePage() {
+  const [isAccepted, setIsAccepted] = useState(false);
+  const letterRef = useRef(null);
+
+  const handleSuccess = () => {
+    setIsAccepted(true);
+    setTimeout(() => {
+      letterRef.current?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 4000);
+  };
+
   return (
     <main 
-      className="relative w-full min-h-[200vh] bg-[linear-gradient(135deg,#d35c8c_0%,#ffc9fc_100%)] bg-fixed"
+      className="relative w-full min-h-[200vh] bg-[linear-gradient(135deg,#d35c8c_0%,#ffc9fc_100%)] bg-fixed overflow-x-hidden"
     >
       
       <ScrollHearts />
       
-      <section className="h-screen w-full flex flex-col items-center justify-center relative z-10">
+      {/* --- FIX IS HERE --- */}
+      {/* Removed "h-screen" and "flex". 
+          We let the ValentineText component (which is 100vh internally) 
+          and GSAP handle the sizing. */}
+      <section className="w-full relative z-10">
         <ValentineText />
       </section>
+      {/* ------------------- */}
 
-      <section className="min-h-screen w-full relative z-10 py-20 bg-black/20 backdrop-blur-sm">
+      <section className="w-full relative z-10 py-20 backdrop-blur-sm">
         <PhotoGallery />
       </section>
 
       <section className="min-h-screen w-full flex items-center justify-center relative z-10 pb-20">
-        <Proposal />
+        <Proposal onSuccess={handleSuccess} />
       </section>
+
+      {isAccepted && (
+        <section 
+          ref={letterRef} 
+          className="min-h-screen w-full flex items-center justify-center relative z-10 pb-20 animate-fadeIn"
+        >
+          <LoveLetter />
+        </section>
+      )}
 
     </main>
   );
