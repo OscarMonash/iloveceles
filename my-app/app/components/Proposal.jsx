@@ -1,24 +1,30 @@
 "use client";
 
 import { useState } from 'react';
-
 const heartPopStyles = `
   @keyframes heartPop {
     0% {
-      transform: translate(-50%, -50%) scale(0.5);
-      opacity: 1; /* Start fully visible and slightly smaller */
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
     }
-    40% {
-      transform: translate(-50%, -50%) scale(1.5);
-      opacity: 1; /* Pop up quickly to full size */
+    15% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    20% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    80% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1; 
     }
     100% {
-      transform: translate(-50%, -50%) scale(4); /* Continue expanding */
-      opacity: 0; /* Fade out completely at the end */
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
     }
   }
 `;
-
 
 export default function Proposal({ onSuccess }) {
   const [stage, setStage] = useState('question');
@@ -56,11 +62,10 @@ export default function Proposal({ onSuccess }) {
     
     setTimeout(() => {
       setPopHearts(prev => prev.filter(h => h.id !== newHeart.id));
-    }, 2500);
+    }, 500);
     
     setStage('success');
 
-    // 2. TRIGGER THE LOVE LETTER UNLOCK
     if (onSuccess) {
       onSuccess();
     }
@@ -72,7 +77,6 @@ export default function Proposal({ onSuccess }) {
     <div className="flex items-center justify-center py-20 px-4 w-full">
       <style>{heartPopStyles}</style>
       
-      {/* Pop Hearts Animation */}
       {popHearts.map((heart) => (
         <div
           key={heart.id}
@@ -81,9 +85,9 @@ export default function Proposal({ onSuccess }) {
             left: '50vw',
             top: '50vh',
             width: '300px',
-            height: '150px',
+            height: '300px',
             pointerEvents: 'none',
-            animation: 'heartPop 3.4s forwards',
+            animation: 'heartPop .5s ease-out forwards', 
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -91,11 +95,11 @@ export default function Proposal({ onSuccess }) {
             borderRadius: '50%',
           }}
         >
-          <div style = {{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <img 
               src="/images/bang.gif" 
               alt="Pop" 
-              className="w-full h-full object-contain "
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -103,9 +107,6 @@ export default function Proposal({ onSuccess }) {
 
       <div className="relative bg-white/90 backdrop-blur-md p-10 rounded-3xl shadow-2xl max-w-lg w-full text-center border-4 border-pink-200 transition-all duration-500 hover:scale-[1.02]">
         
-        {/* 3. FIXED FLOWER POSITIONING (Prevents side-scroll on mobile) 
-            -left-2 on mobile, -left-8 on desktop (md:)
-        */}
         <div className="absolute -top-6 -left-2 md:-left-8 md:-top-8 text-5xl md:text-7xl animate-bounce delay-100">🌹</div>
         <div className="absolute -top-6 -right-2 md:-right-8 md:-top-8 text-5xl md:text-7xl animate-bounce delay-300">🌸</div>
         <div className="absolute -bottom-6 -left-2 md:-left-8 md:-bottom-8 text-5xl md:text-7xl animate-bounce delay-500">🌷</div>
@@ -120,7 +121,6 @@ export default function Proposal({ onSuccess }) {
               best valentines day eva, lav u
             </p>
             
-            {/* VIDEO SECTION */}
             <div className="w-full overflow-hidden rounded-xl shadow-lg border-2 border-pink-100">
               <video 
                 src="/images/celes1.mp4" 

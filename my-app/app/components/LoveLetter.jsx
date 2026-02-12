@@ -28,7 +28,7 @@ export default function LoveLetter() {
           </p>
 
           <p>
-            I love finding and eating good food with you, calling, sitting in the car doing nothing, and just being with you in general, I feel like anything is just so much better when its with you
+            I love doing anything with you, whether its just going out to eat, going on a big date, or just staying in and cuddling, I always feel the happiest when its with you.
           </p>
 
           <p>
