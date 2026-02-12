@@ -8,7 +8,7 @@ const heartPopStyles = `
       transform: translate(-50%, -50%) scale(0.5);
       opacity: 1; /* Start fully visible and slightly smaller */
     }
-    15% {
+    40% {
       transform: translate(-50%, -50%) scale(1.5);
       opacity: 1; /* Pop up quickly to full size */
     }
@@ -83,7 +83,7 @@ export default function Proposal({ onSuccess }) {
             width: '300px',
             height: '150px',
             pointerEvents: 'none',
-            animation: 'heartPop 2.5s forwards',
+            animation: 'heartPop 3.4s forwards',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
