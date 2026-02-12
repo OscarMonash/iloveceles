@@ -5,16 +5,16 @@ import { useState } from 'react';
 const heartPopStyles = `
   @keyframes heartPop {
     0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 1; /* Start fully visible and slightly smaller */
     }
-    40% {
-      transform: translate(-50%, -50%) scale(2.5);
-      opacity: 0.5;
+    15% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 1; /* Pop up quickly to full size */
     }
     100% {
-      transform: translate(-50%, -50%) scale(4);
-      opacity: 0;
+      transform: translate(-50%, -50%) scale(4); /* Continue expanding */
+      opacity: 0; /* Fade out completely at the end */
     }
   }
 `;
@@ -83,7 +83,7 @@ export default function Proposal({ onSuccess }) {
             width: '300px',
             height: '150px',
             pointerEvents: 'none',
-            animation: 'heartPop 2.5s ease-out forwards',
+            animation: 'heartPop 2.5s forwards',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -96,7 +96,7 @@ export default function Proposal({ onSuccess }) {
             <img 
               src="/images/bang.gif" 
               alt="Pop" 
-              className="w-full h-full object-contain drop-shadow-xl"
+              className="w-full h-full object-contain "
             />
           </div>
         </div>
