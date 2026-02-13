@@ -32,7 +32,7 @@ export default function LoveLetter() {
           </p>
 
           <p>
-            I love you so so much beb and I hope this year treats us well and that we get to do everything we wanted to do with each other (and go on that trip)
+            I love you so so much beb and I hope this year and the many coming years treats us well and that we get to do everything we wanted to do with each other (and go on that trip)
           </p>
 
           <p>
